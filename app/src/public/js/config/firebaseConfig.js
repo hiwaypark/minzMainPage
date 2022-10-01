@@ -1,7 +1,7 @@
 "use strict"
 
-const { getApp } = require("firebase/app");
 const firebase = require("firebase/app");
+const firebaseui = require("firebaseui")
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQCcjfc3hOhfps6fDrfZX1Rt_Prt_jFD0",
@@ -14,8 +14,12 @@ const firebaseConfig = {
   measurementId: "G-HX20VVH7N5"
 };
 
-// Initialize Firebase
-firebase = initializeApp(firebaseConfig);
-const analytics = getAnalytics(firebase);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-const minzDB = getApp(firebase);
+const ui = new firebaseui.auth.AuthUI(firebase.auth);
+
+ui.start("firebase-auth-container", {
+  signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
+})
+
+module.exports = firebaseApp;

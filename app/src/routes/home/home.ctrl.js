@@ -15,8 +15,11 @@ const output = {
 }
 
 const process = {
-    login: (req, res) => {
-        console.log(req.body);
+    login: (req, res, next) => {
+        firebaseApp.auth().signInWithEmailAndPassword(req.body.userID, req.body.userPassword)
+        .then(function(firebaseUser){
+            res.redirect("main");
+        });
     },
 };
 
