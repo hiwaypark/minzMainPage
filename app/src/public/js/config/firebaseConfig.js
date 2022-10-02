@@ -18,8 +18,13 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const ui = new firebaseui.auth.AuthUI(firebase.auth);
 
-ui.start("firebase-auth-container", {
-  signInOptions: [firebase.auth.EmailAuthProvider.PROVIDER_ID],
-})
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      requireDisplayName: false
+    }
+  ]
+});
 
 module.exports = firebaseApp;
